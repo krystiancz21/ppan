@@ -19,7 +19,6 @@ def oblicz_h_index(id_artykulow, cytowania):
 
     return h_index
 
-
 def ewaluacja_jednostki(dane_autorow):
     """
     Funkcja zwraca wykaz artykułów zaklasyfikowanych do ewaluacji jednostki oraz oblicza wynik ewaluacji.
