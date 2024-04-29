@@ -46,3 +46,17 @@ def ewaluacja_jednostki(dane_autorow):
     wynik_ewaluacji = sum(punkty_artykulow.values())
 
     return artykuly_do_ewaluacji, wynik_ewaluacji
+
+# Przykładowe dane wejściowe
+dane_autorow = [
+    (['Art1', 'Art2'], [10, 20]),
+    (['Art3', 'Art4'], [30, 40]),
+    (['Art5', 'Art6'], [50, 60])
+]
+
+# Wywołanie funkcji
+artykuly_do_ewaluacji, wynik_ewaluacji = ewaluacja_jednostki(dane_autorow)
+
+# Wyświetlenie wyników
+print("Artykuły do ewaluacji:", artykuly_do_ewaluacji)
+print("Wynik ewaluacji:", wynik_ewaluacji)
