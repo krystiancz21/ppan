@@ -1,3 +1,10 @@
+def test_wrapper(func):
+    def wrapper():
+        print("== Only test ===")
+        func()
+        print("=== end test ===")
+    return wrapper
+
 def sort_articles(dane_autorow):
     sort_data = []
     for id_article, points in dane_autorow:
@@ -42,17 +49,51 @@ def ewaluacja_jednostki(dane_autorow):
 
     return lista_artykulow_do_ewaluacji, wynik_ewaluacji
 
+def wczytaj_dane():
+    dane_autorow = []
+    liczba_autorow = int(input("Podaj liczbę autorów: "))
+    for i in range(liczba_autorow):
+        print(f"--- Autor {i+1} ---")
+        print("Zostaw puste pola, jeśli dany autor nie posiada artykułów")
+        id_artykulow_input = input("Podaj ID artykułów oddzielone przecinkami: ")
+        punkty_input = input("Podaj punkty dla każdego artykułu oddzielone przecinkami: ")
 
-dane_autorow2 = [
-    (['Art1', 'Art2', 'Art3', 'Art4'], [15, 20, 5, 10]),
-    (['Art5', 'Art6'], [30, 40]),
-    (['Art7'], [50]),
-    ([], [])
-]
+        if id_artykulow_input.strip() and punkty_input.strip():
+            id_artykulow = id_artykulow_input.split(',')
+            punkty = list(map(int, punkty_input.split(',')))
+        else:
+            id_artykulow = []
+            punkty = []
 
-# Wywołanie funkcji
-artykuly_do_ewaluacji, wynik_ewaluacji = ewaluacja_jednostki(dane_autorow2)
+        dane_autorow.append((id_artykulow, punkty))
+    return dane_autorow
+
+@test_wrapper
+def testing():
+    dane_autorow2 = [
+        (['Art1', 'Art2', 'Art3', 'Art4'], [15, 20, 5, 10]),
+        (['Art5', 'Art6'], [30, 40]),
+        (['Art7'], [50]),
+        ([], [])
+    ]
+
+    # Wywołanie funkcji
+    artykuly_do_ewaluacji, wynik_ewaluacji = ewaluacja_jednostki(dane_autorow2)
+
+    # Wyświetlenie wyników
+    print("Artykuły do ewaluacji:", artykuly_do_ewaluacji)
+    print("Wynik ewaluacji:", wynik_ewaluacji)
+
+
+# only test
+testing()
+
+# Wywołanie funkcji wczytania danych i ewaluacji
+dane_autorow = wczytaj_dane()
+artykuly_do_ewaluacji, wynik_ewaluacji = ewaluacja_jednostki(dane_autorow)
 
 # Wyświetlenie wyników
 print("Artykuły do ewaluacji:", artykuly_do_ewaluacji)
 print("Wynik ewaluacji:", wynik_ewaluacji)
+
+
